@@ -1,0 +1,1382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Git操作命令</title>
+    <url>/2020/06/28/Git%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p><strong>工作区 ==&gt;&gt;&gt; 暂存区 ==&gt;&gt;&gt; 本地版本库 ==&gt;&gt;&gt; 远程版本库</strong></p>
+<h3 id="git-init（初始化）"><a href="#git-init（初始化）" class="headerlink" title="git init（初始化）"></a>git init（初始化）</h3><h5 id="场景一：把已有的项目代码纳入Git管理"><a href="#场景一：把已有的项目代码纳入Git管理" class="headerlink" title="场景一：把已有的项目代码纳入Git管理"></a>场景一：把已有的项目代码纳入Git管理</h5><ul>
+<li>cd 项目代码所在目录</li>
+<li>git init</li>
+</ul>
+<h5 id="场景二：新建项目直接用Git管理"><a href="#场景二：新建项目直接用Git管理" class="headerlink" title="场景二：新建项目直接用Git管理"></a>场景二：新建项目直接用Git管理</h5><ul>
+<li>cd 工作空间目录</li>
+<li>git init project_name（创建项目并纳入Git管理）</li>
+<li>cd project_name</li>
+</ul>
+<h3 id="git-config（用户配置）"><a href="#git-config（用户配置）" class="headerlink" title="git config（用户配置）"></a>git config（用户配置）</h3><ul>
+<li>git config –local user.name  ‘’（只对某个仓库生效）</li>
+<li>git config –local user.email ‘’（只对某个仓库生效）</li>
+<li>git config –global user.name ‘’（只对当前用户所有仓库生效）</li>
+<li>git config –global user.email ‘’（只对当前用户所有仓库生效）</li>
+<li>git config –system user.name ‘’（对系统所有用户所有仓库生效）</li>
+<li>git config –system user.email ‘’（对系统所有用户所有仓库生效）</li>
+<li>git config –list –local</li>
+<li>git config –list –global</li>
+<li>git config –list –system</li>
+</ul>
+<h3 id="其他操作（版本管理）"><a href="#其他操作（版本管理）" class="headerlink" title="其他操作（版本管理）"></a>其他操作（版本管理）</h3><ul>
+<li><p>git status（查看变更操作）</p>
+</li>
+<li><p>git add file…（工作区 ==&gt;&gt;&gt; 暂存区 ）</p>
+</li>
+<li><p>git add -u（已经被tracked的工作区文件可以直接被加入暂存区，无需再按文件名添加）</p>
+</li>
+<li><p>git commit -m’注释…’（暂存区 ==&gt;&gt;&gt; 本地版本库）</p>
+</li>
+<li><p>git commit -am’注释…’（工作区 ==&gt;&gt;&gt; 本地版本库 ）</p>
+</li>
+<li><p>git mv 旧文件名 新文件名（将工作区文件更名，并加入到暂存区）</p>
+</li>
+<li><p>git branch XXX（新建分支）</p>
+</li>
+<li><p>git branch -v（查看本地所有分支）</p>
+</li>
+<li><p>git branch -av（查看所有分支）</p>
+</li>
+<li><p>git branch -d 分支名称</p>
+</li>
+<li><p>git branch -D 分支名称</p>
+</li>
+<li><p>git checkout XXX（切换分支）</p>
+</li>
+<li><p>git checkout -b 分支名称 历史版本commitID（从历史版本迁出一个分支）</p>
+</li>
+<li><p>git commit –amend（对最近一次commit message的信息做变更）（该变更的commitID会重新生成）</p>
+</li>
+<li><p>git rebase -i commitID（变基操作：变该变的commitID的parentID）（对历史某一次的commit message的信息做变更）（变更本身及后续所有提交的commitID都会重新生成）</p>
+</li>
+<li><p>git reset –hard（清空工作区、暂存区的所有变更操作）</p>
+</li>
+<li><p>git reset –hard commitID（将commitID之后的版本都丢弃，工作区与暂存区都恢复到该版本历史）</p>
+</li>
+<li><p>git reset HEAD（将暂存区变更取消，恢复成当前分支的最新提交版本）</p>
+</li>
+<li><p>git checkout – filename（filename已经加入暂存区，需要将工作区的后续变更恢复到暂存区版本）（撤销工作区修改）</p>
+</li>
+<li><p>git reset HEAD – filename（将已经存在于暂存区的文件filename，撤销（unstage）到工作区）</p>
+</li>
+<li><p>git diff 分支一 分支二（比较两个分支的所有文件差异）</p>
+</li>
+<li><p>git diff 分支一 分支二 – filename（比较两个分支某个文件的差异）</p>
+</li>
+<li><p>git diff 分支一（commitID） 分支二（commitID） – filename（比较两个分支基于某个版本某个文件的差异）</p>
+</li>
+<li><p>git rm filename（删除文件，并将删除操作放入暂存区，无需先在工作目录下删除 filename）</p>
+</li>
+<li><p>git stash（将工作区另存堆栈空间）</p>
+</li>
+<li><p>git stash list（查看堆栈空间信息）</p>
+</li>
+<li><p>git stash apply（应用堆栈信息，继续保留堆栈记录）</p>
+</li>
+<li><p>git stash pop（应用并丢弃堆栈信息）</p>
+</li>
+<li><p>git remote -v（查看本地关联的远端仓库）</p>
+</li>
+<li><p>git remote rm 远程仓库别称（删除本地关联的远程仓库信息）</p>
+</li>
+<li><p>git remote add 远端仓库别称 智能协议（添加远端仓库信息，关联本地仓库）</p>
+</li>
+<li><p>git push 远程仓库别名 本地分支：远程分支（将本地分支推送到远程分支）</p>
+</li>
+<li><p>git push –set-upstream 新仓库名称 本地分支名称 （将本地仓库某分支推送远端仓库）</p>
+</li>
+<li><p>git push 远端仓库别称 –all（将本地仓库所有分支记录都推送远端）</p>
+</li>
+<li><p><del>git push -f 远程仓库名称 本地分支名称（强制推送本地分支版本到远端）</del></p>
+</li>
+<li><p>git fetch 远端仓库别称 远程分支名称（拉取远程分支名称）</p>
+</li>
+<li><p>none-fast-forward（没有共同祖先）</p>
+</li>
+<li><p>本地切换到该分支  git merge 远端仓库别称/远端分支名称</p>
+</li>
+<li><p>git merge –allow-unrelated-histories 远端仓库别称/远端分支名称（允许合并不相关的历史树）</p>
+</li>
+<li><p>git merge 远端仓库名称/远端分支名称（合并远端分支到本地同名分支）</p>
+</li>
+<li><p>git pull &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;（将远程分支版本拉取并合并到本地指定分支）</p>
+</li>
+<li><p>Git  branch –d xxx（删除本地分支）</p>
+</li>
+<li><p>Git push origin –delete xxx（删除远程分支）</p>
+</li>
+</ul>
+<h3 id="git-log（操作记录）"><a href="#git-log（操作记录）" class="headerlink" title="git log（操作记录）"></a>git log（操作记录）</h3><ul>
+<li>git log（查看版本库历史（自下而上，由远及近））</li>
+<li>git log -number（最近number次的历史记录）</li>
+<li>git log –oneline（单行显示，当前分支版本库历史记录）（内容：简短commitID 版本注释）</li>
+<li>git log –oneline 分支名（单行显示，某个分支版本库历史记录）（内容：简短commitID 版本注释）</li>
+<li>git log –oneline –all（单行显示，所有分支版本库历史记录）（内容：简短commitID 版本注释）</li>
+<li>git log –oneline –graph（树形结构查看版本库历史（自下而上，由远及近））（内容：简短commitID 版本注释）</li>
+<li>git log –oneline –all -n5 –graph（单行显示，所有分支版本库最近5条历史记录，并显示树状图）（内容：简短commitID 版本注释）</li>
+<li>git diff（对比所有工作区与暂存区的差异）</li>
+<li>git diff – 文件名（对比指定文件工作区与暂存区的差异）</li>
+<li>git diff –cached（暂存区与 HEAD 版本库最新版本文件对比）</li>
+<li>git diff commitID commitID（两个版本比对）</li>
+<li>git diff HEAD HEAD^^（当前版本与祖父版本比对）</li>
+<li>git diff HEAD HEAD~2（当前版本与祖父版本比对）</li>
+<li>gitk –all（图形化界面）</li>
+</ul>
+<h3 id="git目录结构"><a href="#git目录结构" class="headerlink" title=".git目录结构"></a>.git目录结构</h3><p>./HEAD（记录当前分支名称，更改该文件与checkout 分支名 具有同样的效果）</p>
+<p>./config（本仓库的配置）</p>
+<p>./refs（存放各个分支和Tag的信息）</p>
+<p>./refs/heads</p>
+<p>./refs/heads/master（存放对象，最近一次commit 的指针信息）</p>
+<ul>
+<li>git cat-file -t 对象部分前缀（可以查看该对象类型）</li>
+<li>git cat-file -p 对象部分前缀（可以查看该对象内容）</li>
+</ul>
+<p>./refs/heads/其他分支名称</p>
+<p>./refs/tag</p>
+<p>./objects（）</p>
+]]></content>
+      <tags>
+        <tag>版本控制工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Gradle 脚本指南</title>
+    <url>/2020/06/28/Gradle%E8%84%9A%E6%9C%AC%E6%8C%87%E5%8D%97/</url>
+    <content><![CDATA[<h2 id="Gradle-执行说明"><a href="#Gradle-执行说明" class="headerlink" title="Gradle 执行说明"></a>Gradle 执行说明</h2><h2 id="build-gradle-脚本说明"><a href="#build-gradle-脚本说明" class="headerlink" title="build.gradle 脚本说明"></a>build.gradle 脚本说明</h2><h3 id="配置仓库"><a href="#配置仓库" class="headerlink" title="配置仓库"></a>配置仓库</h3><ul>
+<li>gradle实现离线仓库还可以调用maven的离线仓库</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">repositories &#123;</span><br><span class="line">    mavenLocal() <span class="comment">//直接使用本地maven仓库</span></span><br><span class="line">    maven &#123; url <span class="string">&quot;http://maven.aliyun.com/nexus/content/groups/public&quot;</span> &#125;	<span class="comment">//使用国内镜像仓库</span></span><br><span class="line">    mavenCentral()	<span class="comment">//直接使用国外中央仓库</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>使用mavenLocal() 时Gradle默认会按以下顺序去查找本地的maven仓库：${USER_HOME}/.m2/settings.xml &gt;&gt; M2_HOME/conf/settings.xml &gt;&gt; ${USER_HOME}/.m2/repository。注意，环境变量要加入M2_HOME， 我们配环境时很多时候都是使用MAVEN_HOME或者直接在path中输入bin路径了，导致mavenLocal无法生效。</p>
+</li>
+<li><p>如果本地没有相关jar包，gradle会下载到${USER_HOME}/.gradle文件夹下，若想让gradle下载到指定文件夹，配置GRADLE_USER_HOME环境变量</p>
+</li>
+</ul>
+<h3 id="dependencies-命令说明"><a href="#dependencies-命令说明" class="headerlink" title="dependencies 命令说明"></a>dependencies 命令说明</h3><ol>
+<li><p><strong>implementation</strong><br>这个指令的特点就是，对于使用了该命令编译的依赖，对该项目有依赖的项目将无法访问到使用该命令编译的依赖中的任何程序，也就是将该依赖隐藏在内部，而不对外部公开。</p>
+</li>
+<li><p><strong>api</strong><br>完全等同于compile指令。</p>
+</li>
+<li><p><strong>compile</strong><br>这种是我们最常用的方式，使用该方式依赖的库将会参与编译和打包。</p>
+</li>
+<li><p><strong>testCompile</strong><br>只在单元测试代码的编译以及最终打包测试时有效。</p>
+</li>
+<li><p><strong>debugCompile</strong><br>只在debug模式的编译和最终的debug打包时有效。</p>
+</li>
+<li><p><strong>releaseCompile</strong><br>仅仅针对Release模式的编译和最终的Release打包。</p>
+</li>
+<li><p><strong>provided</strong><br>只在编译时有效，不会参与打包，可以在自己的moudle中使用该方式依赖。</p>
+</li>
+<li><p><strong>apk（runtimeOnly）</strong></p>
+<p>只在生成apk的时候参与打包，编译时不会参与，很少用。</p>
+</li>
+</ol>
+<h2 id="19版IDEA-Feature介绍"><a href="#19版IDEA-Feature介绍" class="headerlink" title="19版IDEA Feature介绍"></a>19版IDEA Feature介绍</h2>]]></content>
+      <tags>
+        <tag>项目构建</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2021/05/26/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <categories>
+        <category>hexo入坑指南</category>
+      </categories>
+      <tags>
+        <tag>神引篇</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo-Next排坑记录</title>
+    <url>/2021/05/26/Hexo-Next%E6%8E%92%E5%9D%91%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p>Hexo构建博客</p>
+<p>优秀前辈的博客：<a href="https://www.zhyong.cn/">https://www.zhyong.cn/</a></p>
+<h3 id="问题记录"><a href="#问题记录" class="headerlink" title="问题记录"></a>问题记录</h3><h4 id="hexo换主题乱码问题的解决"><a href="#hexo换主题乱码问题的解决" class="headerlink" title="hexo换主题乱码问题的解决"></a>hexo换主题乱码问题的解决</h4><ul>
+<li><p>问题表现</p>
+<p>% extends ‘_layout.swig’  import ‘_macro/post.swig’ as post_template </p>
+</li>
+<li><p>问题原因</p>
+<p>原因是hexo在5.0之后把swig给删除了需要自己手动安装</p>
+</li>
+<li><p>问题解决</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm i hexo-renderer-swig</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean          </span><br><span class="line">hexo generate      </span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>hexo入坑指南</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>事物篇</title>
+    <url>/2021/05/21/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%AF%87/</url>
+    <content><![CDATA[<h2 id="本地事务"><a href="#本地事务" class="headerlink" title="本地事务"></a>本地事务</h2><p>数据操作的最小单元是事务，而不是一条SQL语句</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">start transaction;</span><br><span class="line">begin;		//开始事务，对数据的dml操作不直接修改数据表，而是先被记录到日志文件中</span><br><span class="line">commit;		//提交事务，将日志中的记录操作，永久保存在数据表中，并清空日志文件。</span><br><span class="line">rollback;		//回滚事务，直接清空日志文件</span><br></pre></td></tr></table></figure>
+
+<h4 id="事务特性"><a href="#事务特性" class="headerlink" title="事务特性"></a>事务特性</h4><p><strong>ACID</strong></p>
+<ul>
+<li>A - 原子性 Atomic</li>
+</ul>
+<p>一个事务是一个不可分割的工作单元，事务中包括的操作要么都做，要么都不做。</p>
+<p>数据操作的最小单元是事务，而不是SQL语句 。</p>
+<ul>
+<li>C - 一致性 Consistency</li>
+</ul>
+<p>事务必须是使数据库从一个一致性状态变到另一个一致性状态。一致性与原子性是密切相关的</p>
+<ul>
+<li>I - 隔离性 Isolation</li>
+</ul>
+<p>一个事务的执行不能被其他事务干扰。</p>
+<p>即一个事务内部的操作及使用的数据对并发的其他事务是隔离的，并发执行的各个事务之间不能互相干扰。</p>
+<ul>
+<li>D - 持久性 Durancy</li>
+</ul>
+<p>一个事务一旦提交，它对数据库中数据的改变就应该是永久性的。接下来的其他操作或故障不应该对其有任何影响。</p>
+<h4 id="传播属性"><a href="#传播属性" class="headerlink" title="传播属性"></a>传播属性</h4><ul>
+<li>传播行为决定了事务上下文是否共享,子事务若共享父事务的状态，那么对子事务的操作，就会反映到父事务(核心)</li>
+<li>事务的传播行为体现了原子性</li>
+<li>事务传播属性注解必须应用到公有方法</li>
+</ul>
+<ol>
+<li><p>REQUIRED</p>
+<p>业务方法必须处于事务中运行。如果有事务就加入其中，没有就为自己创建一个新的事务</p>
+</li>
+<li><p>NOT_SUPPORTED（不需要父事务，如果有就挂起父事务）</p>
+<p>声明方法不需要事务。如果方法没有关联到一个事务，容器不会为它开启事务。如果方法在一个事务中被调用，该事务会被挂起，在方法调用结束后，原先的事务便会恢复执行。<br>应用场景：有数据操作处理(需要事务)+异步调用(不需要事务，挂起)</p>
+</li>
+<li><p>REQUIRESNEW（新建业务事务，挂起父事务）</p>
+<p>不管是否存在事务，都新建一个事务；若方法已经运行在一个事务中，则原有事务会被挂起，新的事务会被创建，直到方法执行结束，新事物才算结束，原有事务才恢复执行</p>
+</li>
+<li><p>MANDATORY（需要在父事务下运行，否则抛异常）</p>
+<p>该属性指定业务方法只能在一个已经存在的事务中执行，业务方法不能发起自己的事务（新事物）。如果业务方法在没有事务的环境下调用，容器就会抛出异常</p>
+</li>
+<li><p>SUPPORTS（父事务可有可无，不新建业务事务）</p>
+<p>有事务就直接加入使用，没有事务就按照没有事务的情况执行</p>
+</li>
+<li><p>NEVER（不能出现任何父事务）</p>
+<p>业务方法不能与任何事务关联，否则直接抛异常</p>
+<p>应用场景：应用与报表统计程序</p>
+</li>
+<li><p>NESTED</p>
+<p>如果一个活动的事务存在，则运行在一个嵌套的事务中. 如果没有活动事务, 则按REQUIRED属性执行.它使用了一个单独的事务， 这个事务拥有多个可以回滚的保存点。内部事务的回滚不会对外部事务造成影响。它只对DataSourceTransactionManager事务管理器起效</p>
+<p>事务嵌套，子事务的成功与失败不影响主事务，主事务的成功失败影响子事务</p>
+</li>
+</ol>
+<h4 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h4><p>事务为了避免相互干扰，执行时要进行隔离。也就是A执行时要B等待。但严格的隔离会造成性能的下降。数据库为了兼顾数据安全和性能，允许在一定程度上多个事务并行执行</p>
+<p>Mysql四种事务<strong>隔离级别从低到高</strong>（越高数据越安全；越低性能越好，但会造成数据访问的问题）：</p>
+<ul>
+<li>READ-UNCOMMITTED</li>
+<li>READ-COMMITTED</li>
+<li>REPEATABLE-READ      <strong>Mysql 的默认隔离级别</strong>   可重复读</li>
+<li>SERIALIZABLE</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>可能引发的问题</th>
+<th>READ-UNCOMMITTED</th>
+<th>READ-COMMITTED</th>
+<th>REPEATABLE-READ</th>
+<th>SERIALIZABLE</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>幻读</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>不可重复读</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>脏读</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody></table>
+<p>数据库并发访问的冲突问题</p>
+<ul>
+<li><p><strong>脏读</strong></p>
+<p>读到其他事务未提交的数据</p>
+</li>
+<li><p><strong>不可重复读</strong></p>
+<p>重复读取同一数据时，与之前读取的数据不一致</p>
+<p>一个事务提交的数据，可以被另一个事务立即读取</p>
+<p>一个事务内在读取某些数据后的某个时间，再次读取以前读过的数据，却发现其读出的数据已经发生了变更、或者某些记录已经被删除了。(<strong>Update\Delete</strong>)</p>
+</li>
+<li><p><strong>幻读</strong></p>
+<p>读取到已经被删除的数据</p>
+<p>读取不到新插入的数据</p>
+<p>例如：系统事务A将数据库中所有数据都删除的时候，但是事务B就在这个时候新插入了一条记录，当事务A删除结束后发现还有一条数据，就好像发生了幻觉一样。这就叫幻读</p>
+</li>
+</ul>
+<p>四、实际场景中的七大事务传播行为的使用<br>4.1 在一个话费充值业务处理逻辑中，有如下图所示操作:</p>
+<p>业务需要扣款操作和创建订单操作同成功或者失败，因此，charger()和order()的事务不能相互独立，需要包含在chargeHandle()的事务中；<br>通过以上需求，可以给charge()和order()的事务传播行为定义成：PROPAGATION_MANDATORY<br>只要charge()或者order()抛出异常整个chargeHandle()都一起回滚，即使chargeHandle()捕获异常也没用，不允许提交事务<br>4.2 如果业务需求没接受到一次请求到要记录日志到数据库<br>如下图：</p>
+<p>因为log()的操作不管扣款和创建订单成功与否都要生成日志，并且日志的操作成功与否不影响充值处理，所以log()方法的事务传播行为可以定义为:PROPAGATION_REQUIRES_NEW.</p>
+<p>4.3 在订单的售后处理中，更新完订单金额后，需要自动统计销售报表<br>如下图所示</p>
+<p>根据业务可知，售后是已经处理完订单的充值请求后的功能，是对订单的后续管理，统计报表report()方法耗时较长，因此，我们需要设置report()的事务传播行为为:PROPAGATION_NEVER,表示不适合在有事务的操作中调用，因为report()太耗时。</p>
+<p>4.4 在银行新增银行卡业务中，需要执行两个操作<br>一个是保存银行卡信息，一个是登记新创建的银行卡信息，其中登记银行卡信息成功与否不影响银行卡的创建。</p>
+<p>由以上需求，我们可知对于regster()方法的事务传播行为，可以设置为PROPAGATION_NESTED</p>
+<p>action()事务的回滚，regster()保存的信息就没意义，也就需要跟着回滚，而regster()的回滚不影响action()事务；</p>
+<p>insert()的事务传播行为可以设置为PROPAGATION_REQUIRED, PROPAGATION_MANDATORY，即insert()回滚事务,action()的事务必须跟着回滚。</p>
+<p>————————————————<br>版权声明：本文为CSDN博主「有恒则成」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/hardworking0323/article/details/81001582">https://blog.csdn.net/hardworking0323/article/details/81001582</a></p>
+<h2 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h2><h4 id="XA（2-Phase-Commit）"><a href="#XA（2-Phase-Commit）" class="headerlink" title="XA（2-Phase-Commit）"></a>XA（2-Phase-Commit）</h4><ol>
+<li><p>概念</p>
+<p>阶段一：提交事务请求（投票阶段）</p>
+<p>阶段二：执行事务提交（执行阶段）</p>
+</li>
+<li><p>使用特点</p>
+<p>优点：</p>
+<p>缺点：同步阻塞、单点问题、<strong>数据不一致</strong>/脑裂、太过保守</p>
+</li>
+<li><p>适用场景</p>
+<p>同一个业务系统使用多个数据源操作（不建议在微服务架构下使用）</p>
+</li>
+<li><p>解决方案</p>
+<p>WebLogic/Webshare    Spring JTA</p>
+<p>Tomcat    Jotm、Automikos整合Spring事务</p>
+</li>
+</ol>
+<h4 id="TCC（Try-Confirm-Commit）"><a href="#TCC（Try-Confirm-Commit）" class="headerlink" title="TCC（Try-Confirm-Commit）"></a>TCC（Try-Confirm-Commit）</h4><ol>
+<li><p>概念（补偿性事务）</p>
+<p>阶段一（Try）：完成所有业务检查（一致性），预留必须业务资源（准隔离性）</p>
+<p>阶段二（Confirm）：使用Try阶段预留的业务资源执行业务（业务操作必须幂等性），如果执行出现异常，要进行重试</p>
+<p>阶段三（Cancel）：释放Try阶段预留的业务资源，在这里就是释放资源锁定</p>
+<p>如果在任一子业务Confirm阶段有操作无法执行成功，会造成多业务活动管理器的响应超时，此时要对其他业务执行补偿性事务/如果补偿操作执行也出现异常，必须进行<strong>重试</strong>。若实在无法执行成功，则事务管理器必须能够感知到失败的操作，进行log（用于事后人工进行补偿型事务操作或者交由中间件接管在之后进行补偿事务操作）</p>
+</li>
+<li><p>使用特点</p>
+<p>优点：</p>
+<p>缺点：<strong>网络问题</strong></p>
+</li>
+<li><p>适用场景</p>
+<ul>
+<li>严格一致性</li>
+<li>执行时间短</li>
+<li>实施性要求高</li>
+</ul>
+<p>业务：资金账户、红包、收付款业务等</p>
+</li>
+<li><p>解决方案：Seata TCC</p>
+</li>
+</ol>
+<h4 id="异步确保型-可靠消息最终一致性（基于消息队列实现）"><a href="#异步确保型-可靠消息最终一致性（基于消息队列实现）" class="headerlink" title="异步确保型/可靠消息最终一致性（基于消息队列实现）"></a>异步确保型/可靠消息最终一致性（基于消息队列实现）</h4><ol>
+<li><p>概念</p>
+</li>
+<li><p>使用特点</p>
+<p>优点：</p>
+<p>缺点：</p>
+</li>
+<li><p>适用场景</p>
+</li>
+<li><p>解决方案：Rocket MQ</p>
+</li>
+</ol>
+<h4 id="尽最大努力通知型"><a href="#尽最大努力通知型" class="headerlink" title="尽最大努力通知型"></a>尽最大努力通知型</h4><h2 id="seata框架支持的事务模式"><a href="#seata框架支持的事务模式" class="headerlink" title="seata框架支持的事务模式"></a>seata框架支持的事务模式</h2><p>流行程度：AT &gt; TCC &gt; Saga</p>
+<h4 id="AT模式"><a href="#AT模式" class="headerlink" title="AT模式"></a>AT模式</h4><h5 id="三种角色"><a href="#三种角色" class="headerlink" title="三种角色"></a>三种角色</h5><p>TC（Transaction Coordinator）事务协调者</p>
+<p>维护全局和分支事务的状态，驱动全局事务提交或回滚</p>
+<p>TM（Transaction Manager）事务管理器</p>
+<p>定义全局事务的范围：开始全局事务、提交或回滚全局事务</p>
+<p>RM（Resource Manager）资源管理器</p>
+<p>管理分支事务处理的资源，与TC交互以注册分支事务和报告事务的状态，并驱动分支事务提交或回滚；</p>
+<p>其中TC为单独部署的Server服务端，TM和RM为嵌入到应用中的Client客户端</p>
+<h5 id="声明周期"><a href="#声明周期" class="headerlink" title="声明周期"></a>声明周期</h5><p>TM请求TC开启一个全局事务，TC会生成一个XID座位全局事务的编号</p>
+<p>XID会在微服务的调用链路中传播，保证将多个微服务的子事务关联在一起；</p>
+<p>RM请求TC将本地事务注册为全局事务的分支事务，通过全局事务的XID 进行关联</p>
+<p>TM请求TC告诉XID对应的全局事务是进行提交还是回滚</p>
+<h5 id="AT模式环境部署"><a href="#AT模式环境部署" class="headerlink" title="AT模式环境部署"></a>AT模式环境部署</h5><ol>
+<li><p>TC Server运行环境部署</p>
+<p>​        TC 需要进行全局事务和分支事务的记录，所以需要对应的存储，母亲，TCC有三种存储模式（store.mode）;</p>
+<p>​        <strong>file模式</strong>：适合单机模式，全局事务会话信息在内存中读写，并持久化本地文件root.data，性能较高</p>
+<p>​        <strong>db模式</strong>：适合集群模式，全局事务会话信息通过db共享，相对性能差点</p>
+<p>​        <strong>redis模式</strong>：解决db存储的性能问题</p>
+</li>
+<li><p>Seata运行环境部署</p>
+<p>下载Seata：http:///seata.io/zh-cn/bloh/download.html</p>
+<p>解压：tar -zxvf seats-server-1.3.0.tar.gz</p>
+<p>切换 cd seata</p>
+<p>默认seat-server.sh脚本设置的jvm内存参数2G</p>
+<p>在bin目录下启动：./seata-server.sh</p>
+<p>默认配置下，Seata TC Server启动在8091端口；在file模式下，可以看到用于持久化的本地文件root.data</p>
+</li>
+</ol>
+<h5 id="AT模式事务案例："><a href="#AT模式事务案例：" class="headerlink" title="AT模式事务案例："></a>AT模式事务案例：</h5><h6 id="单体应用多数据源分布式事务"><a href="#单体应用多数据源分布式事务" class="headerlink" title="单体应用多数据源分布式事务"></a>单体应用多数据源分布式事务</h6><p>在spring boot单体项目中，如果使用了多数据源，就需要考虑多个数据源的数据一致性，即产生分布式事务的问题，可以采用Seata 的AT事务模式来解决该分布式事务问题</p>
+<p>每个数据库需要有undo_log表，主要用于分支事务的回滚</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 注意此处0.7.0+ 增加字段 context</span><br><span class="line">CREATE TABLE `undo_log` (</span><br><span class="line">  `id` bigint(20) NOT NULL AUTO_INCREMENT,</span><br><span class="line">  `branch_id` bigint(20) NOT NULL,</span><br><span class="line">  `xid` varchar(100) NOT NULL,</span><br><span class="line">  `context` varchar(128) NOT NULL,</span><br><span class="line">  `rollback_info` longblob NOT NULL,</span><br><span class="line">  `log_status` int(11) NOT NULL,</span><br><span class="line">  `log_created` datetime NOT NULL,</span><br><span class="line">  `log_modified` datetime NOT NULL,</span><br><span class="line">  PRIMARY KEY (`id`),</span><br><span class="line">  UNIQUE KEY `ux_undo_log` (`xid`,`branch_id`)</span><br><span class="line">) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">-- 添加依赖seate</span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.seata<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>seata-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">-- dynamic datasource</span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.baomidou<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>dynamic-datasource-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.2.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="comment">#是否启动对Seate的集成</span></span><br><span class="line"><span class="meta">spring.datasource.dynamic.seate</span>=<span class="string">true</span></span><br><span class="line"><span class="comment">#Seata应用编号，默认为$&#123;spring.application.name&#125;</span></span><br><span class="line"><span class="meta">seata.tx-service-group</span>=<span class="string">$&#123;Spring。application.name&#125;-group</span></span><br><span class="line"><span class="comment">#虚拟组和分组的映射=seata.tx-service-group</span></span><br><span class="line"><span class="meta">seata.service.vgroup-mapping.29-seata-distributed-transaction-group</span>=<span class="string">default</span></span><br><span class="line"><span class="meta">seata.service.vgroup-mapping.$&#123;seata.tx-service-group&#125;</span>=<span class="string">default</span></span><br><span class="line"><span class="comment">#分组和seata服务的映射</span></span><br><span class="line"><span class="meta">seata.service.grouplist.default</span>=<span class="string">192.168.128:8091</span></span><br><span class="line"><span class="meta">seata.config.type</span>=<span class="string">file</span></span><br><span class="line"><span class="meta">seata.registry.type</span>=<span class="string">file</span></span><br></pre></td></tr></table></figure>
+
+<p>Seata全局事务注解 @GlobalTransactional</p>
+<h6 id="微服务的分布式事务"><a href="#微服务的分布式事务" class="headerlink" title="微服务的分布式事务"></a>微服务的分布式事务</h6><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 添加依赖seate</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;spring-cloud-starter-alibaba-seata&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">spring.application.name=29-seata.distributed-order-service</span><br><span class="line">-- seata的配置</span><br><span class="line">seata.application-id=$&#123;spring.application.name&#125;</span><br><span class="line">seata.tx-service-group=$&#123;spring.application.name&#125;-group</span><br><span class="line">seata.service.vgroup-mapping.29-seata-distributed-order-service-group=default</span><br><span class="line">seata.service.grouplist.default=192.168.172.128:8091</span><br><span class="line">seata.registry.type=file</span><br></pre></td></tr></table></figure>
+
+
+
+<p>AT事务模式分布式事务工作机制</p>
+<p><strong>前提</strong></p>
+<p>基于支持本地ACID事务的关系型数据库（mysql、oracle）</p>
+<p>Java应用，通过JDBC访问数据库</p>
+<p><strong>整体机制</strong></p>
+<p>就是两阶段提交协议的演变</p>
+<ul>
+<li>一阶段：“业务数据”和“回滚日志”记录在同一个本地事务中提交，释放本地锁和连接资源；（本地事务，就已经在数据库持久化）</li>
+<li>二阶段：提交异步化，非常快速的完成（正常情况，直接提交，同步TC server的状态，删除回滚日志）；回滚通过一阶段的回滚日志进行反向补偿（异常情况，反向补偿）；</li>
+</ul>
+<h5 id="并发情况下，对AT模式，数据一致性的考验"><a href="#并发情况下，对AT模式，数据一致性的考验" class="headerlink" title="并发情况下，对AT模式，数据一致性的考验"></a>并发情况下，对AT模式，数据一致性的考验</h5><h6 id="写隔离"><a href="#写隔离" class="headerlink" title="写隔离"></a>写隔离</h6><p>一阶段本地事务提交前，要确保拿到 <strong>全局锁</strong> ；拿不到 <strong>全局锁</strong> 不能提交本地事务。</p>
+<p>拿 <strong>全局锁</strong> 的尝试被限制在一定范围内，超出范围将放弃，并回滚本地事务，释放本地锁</p>
+<h6 id="读隔离"><a href="#读隔离" class="headerlink" title="读隔离"></a>读隔离</h6><p>数据库本地事务的隔离级别</p>
+<p>在数据库本地事务隔离级别 <strong>读已提交（Read Committed）</strong> 或以上的基础上，Seata（AT 模式）的默认全局隔离级别是 <strong>读未提交（Read Uncommitted）</strong> 。</p>
+<p>如果应用在特定场景下，必需要求全局的 <strong>读已提交</strong> ，目前 Seata 的方式是通过 SELECT FOR UPDATE 语句的代理。</p>
+<h4 id="TCC模式"><a href="#TCC模式" class="headerlink" title="TCC模式"></a>TCC模式</h4><h4 id="Saga模式"><a href="#Saga模式" class="headerlink" title="Saga模式"></a>Saga模式</h4><h4 id="XA模式（正在研发中…）"><a href="#XA模式（正在研发中…）" class="headerlink" title="XA模式（正在研发中…）"></a>XA模式（正在研发中…）</h4>]]></content>
+      <tags>
+        <tag>事物</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vim终端中的编辑器</title>
+    <url>/2021/05/26/vim%E7%BB%88%E7%AB%AF%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8/</url>
+    <content><![CDATA[<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><ul>
+<li><code>vi</code> 简介</li>
+<li>打开和新建文件</li>
+<li>三种工作模式</li>
+<li>常用命令</li>
+<li>分屏命令</li>
+<li>常用命令速查图</li>
+</ul>
+<h2 id="01-vi-简介"><a href="#01-vi-简介" class="headerlink" title="01. vi 简介"></a>01. <code>vi</code> 简介</h2><h3 id="1-1-学习-vi-的目的"><a href="#1-1-学习-vi-的目的" class="headerlink" title="1.1 学习 vi 的目的"></a>1.1 学习 <code>vi</code> 的目的</h3><ul>
+<li>在工作中，要对 <strong>服务器</strong> 上的文件进行 <strong>简单</strong> 的修改，可以使用 <code>ssh</code> 远程登录到服务器上，并且使用 <code>vi</code> 进行快速的编辑即可</li>
+<li>常见需要修改的文件包括：<ul>
+<li><strong>源程序</strong></li>
+<li><strong>配置文件</strong>，例如 <code>ssh</code> 的配置文件 <code>~/.ssh/config</code><blockquote>
+<ul>
+<li>在没有图形界面的环境下，要编辑文件，<code>vi</code> 是最佳选择！</li>
+<li>每一个要使用 Linux 的程序员，都应该或多或少的学习一些 <code>vi</code> 的常用命令</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-vi-和-vim"><a href="#1-2-vi-和-vim" class="headerlink" title="1.2 vi 和 vim"></a>1.2 vi 和 vim</h3><ul>
+<li>在很多 <code>Linux</code> 发行版中，直接把 <code>vi</code> 做成 <code>vim</code> 的软连接</li>
+</ul>
+<h4 id="vi"><a href="#vi" class="headerlink" title="vi"></a>vi</h4><ul>
+<li><code>vi</code> 是 <code>Visual interface</code> 的简称，是 <code>Linux</code> 中 <strong>最经典</strong> 的文本编辑器</li>
+<li><code>vi</code> 的核心设计思想 —— <strong>让程序员的手指始终保持在键盘的核心区域，就能完成所有的编辑操作</strong></li>
+</ul>
+<p><img src="media/14993340485745/001_vi%E9%94%AE%E7%9B%98.png" alt="001_vi键盘-w551"></p>
+<ul>
+<li><code>vi</code> 的特点：<ul>
+<li><strong>没有图形界面</strong> 的 <strong>功能强大</strong> 的编辑器</li>
+<li>只能是编辑 <strong>文本内容</strong>，不能对字体、段落进行排版</li>
+<li><strong>不支持鼠标操作</strong></li>
+<li><strong>没有菜单</strong></li>
+<li><strong>只有命令</strong></li>
+</ul>
+</li>
+<li><code>vi</code> 编辑器在 <strong>系统管理</strong>、<strong>服务器管理</strong> 编辑文件时，<strong>其功能永远不是图形界面的编辑器能比拟的</strong></li>
+</ul>
+<h4 id="vim"><a href="#vim" class="headerlink" title="vim"></a><code>vim</code></h4><p><strong>vim = vi improved</strong></p>
+<ul>
+<li><code>vim</code> 是从 <code>vi</code> 发展出来的一个文本编辑器，支持 <strong>代码补全</strong>、<strong>编译</strong> 及 <strong>错误跳转</strong> 等方便编程的功能特别丰富，在程序员中被广泛使用，被称为 <strong>编辑器之神</strong></li>
+</ul>
+<h4 id="查询软连接命令（知道）"><a href="#查询软连接命令（知道）" class="headerlink" title="查询软连接命令（知道）"></a>查询软连接命令（知道）</h4><ul>
+<li>在很多 <code>Linux</code> 发行版中直接把 <code>vi</code> 做成 <code>vim</code> 的软连接</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查找 vi 的运行文件</span></span><br><span class="line"></span><br><span class="line">$ <span class="built_in">which</span> vi</span><br><span class="line">$ ls -l /usr/bin/vi</span><br><span class="line">$ ls -l /etc/alternatives/vi</span><br><span class="line">$ ls -l /usr/bin/vim.basic</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找 vim 的运行文件</span></span><br><span class="line">$ <span class="built_in">which</span> vim</span><br><span class="line">$ ls -l /usr/bin/vim</span><br><span class="line">$ ls -l /etc/alternatives/vim</span><br><span class="line">$ ls -l /usr/bin/vim.basic </span><br></pre></td></tr></table></figure>
+
+<h2 id="02-打开和新建文件"><a href="#02-打开和新建文件" class="headerlink" title="02. 打开和新建文件"></a>02. 打开和新建文件</h2><ul>
+<li>在终端中输入 <code>vi</code> <strong>在后面跟上文件名</strong> 即可</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ vi 文件名</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果文件已经存在，会直接打开该文件</li>
+<li>如果文件不存在，会新建一个文件</li>
+</ul>
+<h3 id="2-1-打开文件并且定位行"><a href="#2-1-打开文件并且定位行" class="headerlink" title="2.1 打开文件并且定位行"></a>2.1 打开文件并且定位行</h3><ul>
+<li><p>在日常工作中，有可能会遇到 <strong>打开一个文件，并定位到指定行</strong> 的情况</p>
+</li>
+<li><p>例如：在开发时，<strong>知道某一行代码有错误</strong>，可以 <strong>快速定位</strong> 到出错代码的位置</p>
+</li>
+<li><p>这个时候，可以使用以下命令打开文件</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ vi 文件名 +行数</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>提示：如果只带上 <code>+</code> 而不指定行号，会直接定位到文件末尾</p>
+</blockquote>
+<h3 id="2-2-异常处理"><a href="#2-2-异常处理" class="headerlink" title="2.2 异常处理"></a>2.2 异常处理</h3><ul>
+<li>如果 <code>vi</code> 异常退出，在磁盘上可能会保存有 <strong>交换文件</strong></li>
+<li>下次再使用 <code>vi</code> 编辑该文件时，会看到以下屏幕信息，按下字母 <code>d</code> 可以 <strong>删除交换文件</strong> 即可</li>
+</ul>
+<blockquote>
+<p>提示：按下键盘时，注意关闭输入法</p>
+</blockquote>
+<p><img src="media/14993340485745/002_%E5%88%A0%E9%99%A4%E4%BA%A4%E6%8D%A2%E6%96%87%E4%BB%B6.png" alt="002_删除交换文件-w1048"></p>
+<h2 id="03-三种工作模式"><a href="#03-三种工作模式" class="headerlink" title="03. 三种工作模式"></a>03. 三种工作模式</h2><ul>
+<li><code>vi</code> 有三种基本工作模式：<ol>
+<li><strong>命令模式</strong><ul>
+<li><strong>打开文件首先进入命令模式</strong>，是使用 <code>vi</code> 的 <strong>入口</strong></li>
+<li>通过 <strong>命令</strong> 对文件进行常规的编辑操作，例如：<strong>定位</strong>、<strong>翻页</strong>、<strong>复制</strong>、<strong>粘贴</strong>、<strong>删除</strong>……</li>
+<li>在其他图形编辑器下，通过 <strong>快捷键</strong> 或者 <strong>鼠标</strong> 实现的操作，都在 <strong>命令模式</strong> 下实现</li>
+</ul>
+</li>
+<li><strong>末行模式</strong> —— 执行 <strong>保存</strong>、<strong>退出</strong> 等操作 <ul>
+<li>要退出 <code>vi</code> 返回到控制台，需要在末行模式下输入命令</li>
+<li><strong>末行模式</strong> 是 <code>vi</code> 的 <strong>出口</strong></li>
+</ul>
+</li>
+<li><strong>编辑模式</strong> —— 正常的编辑文字</li>
+</ol>
+</li>
+</ul>
+<p><img src="media/14993340485745/003_vi%E7%9A%84%E6%A8%A1%E5%BC%8F.png" alt="003_vi的模式-w500"></p>
+<blockquote>
+<p>提示：在 <code>Touch Bar</code> 的 Mac 电脑上 ，按 <code>ESC</code> 不方便，可以使用 <code>CTRL + [</code> 替代</p>
+</blockquote>
+<h3 id="末行模式命令"><a href="#末行模式命令" class="headerlink" title="末行模式命令"></a>末行模式命令</h3><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">w</td>
+<td align="center">write</td>
+<td>保存</td>
+</tr>
+<tr>
+<td align="center">q</td>
+<td align="center">quit</td>
+<td>退出，如果没有保存，不允许退出</td>
+</tr>
+<tr>
+<td align="center">q!</td>
+<td align="center">quit</td>
+<td>强行退出，不保存退出</td>
+</tr>
+<tr>
+<td align="center">wq</td>
+<td align="center">write &amp; quit</td>
+<td>保存并退出</td>
+</tr>
+<tr>
+<td align="center">x</td>
+<td align="center"></td>
+<td>保存并退出</td>
+</tr>
+</tbody></table>
+<h2 id="04-常用命令"><a href="#04-常用命令" class="headerlink" title="04. 常用命令"></a>04. 常用命令</h2><h3 id="命令线路图"><a href="#命令线路图" class="headerlink" title="命令线路图"></a>命令线路图</h3><ol start="0">
+<li>重复次数<ul>
+<li>在命令模式下，<strong>先输入一个数字</strong>，<strong>再跟上一个命令</strong>，可以让该命令 <strong>重复执行指定次数</strong> </li>
+</ul>
+</li>
+<li>移动和选择（<strong>多练</strong>）<ul>
+<li><code>vi</code> 之所以快，关键在于 <strong>能够快速定位到要编辑的代码行</strong></li>
+<li><strong>移动命令</strong> 能够 和 <strong>编辑操作</strong> 命令 <strong>组合使用</strong></li>
+</ul>
+</li>
+<li>编辑操作<ul>
+<li><strong>删除</strong>、<strong>复制</strong>、<strong>粘贴</strong>、<strong>替换</strong>、<strong>缩排</strong></li>
+</ul>
+</li>
+<li>撤销和重复</li>
+<li>查找替换</li>
+<li>编辑</li>
+</ol>
+<h4 id="学习提示"><a href="#学习提示" class="headerlink" title="学习提示"></a>学习提示</h4><ol>
+<li><code>vi</code> 的命令较多，<strong>不要期望一下子全部记住</strong>，个别命令忘记了，只是会影响编辑速度而已</li>
+<li>在使用 <code>vi</code> 命令时，注意 <strong>关闭中文输入法</strong></li>
+</ol>
+<h3 id="4-1-移动（基本）"><a href="#4-1-移动（基本）" class="headerlink" title="4.1 移动（基本）"></a>4.1 移动（基本）</h3><ul>
+<li>要熟练使用 <code>vi</code>，首先应该学会怎么在 <strong>命令模式</strong> 下样快速移动光标</li>
+<li><strong>编辑操作命令</strong>，能够和 <strong>移动命令</strong> 结合在一起使用<h4 id="1-上、下、左、右"><a href="#1-上、下、左、右" class="headerlink" title="1) 上、下、左、右"></a>1) 上、下、左、右</h4></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th>功能</th>
+<th align="center">手指</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">h</td>
+<td>向左</td>
+<td align="center">食指</td>
+</tr>
+<tr>
+<td align="center">j</td>
+<td>向下</td>
+<td align="center">食指</td>
+</tr>
+<tr>
+<td align="center">k</td>
+<td>向上</td>
+<td align="center">中指</td>
+</tr>
+<tr>
+<td align="center">l</td>
+<td>向右</td>
+<td align="center">无名指</td>
+</tr>
+</tbody></table>
+<p><img src="media/14993340485745/005_%E7%A7%BB%E5%8A%A8%E5%85%89%E6%A0%87.png" alt="005_移动光标-w551"></p>
+<h4 id="2-行内移动"><a href="#2-行内移动" class="headerlink" title="2) 行内移动"></a>2) 行内移动</h4><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">w</td>
+<td align="center">word</td>
+<td>向后移动一个单词</td>
+</tr>
+<tr>
+<td align="center">b</td>
+<td align="center">back</td>
+<td>向前移动一个单词</td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center"></td>
+<td>行首</td>
+</tr>
+<tr>
+<td align="center">^</td>
+<td align="center"></td>
+<td>行首，第一个不是空白字符的位置</td>
+</tr>
+<tr>
+<td align="center">$</td>
+<td align="center"></td>
+<td>行尾</td>
+</tr>
+</tbody></table>
+<h4 id="3-行数移动"><a href="#3-行数移动" class="headerlink" title="3) 行数移动"></a>3) 行数移动</h4><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">gg</td>
+<td align="center">go</td>
+<td>文件顶部</td>
+</tr>
+<tr>
+<td align="center">G</td>
+<td align="center">go</td>
+<td>文件末尾</td>
+</tr>
+<tr>
+<td align="center">数字gg</td>
+<td align="center">go</td>
+<td>移动到 数字 对应行数</td>
+</tr>
+<tr>
+<td align="center">数字G</td>
+<td align="center">go</td>
+<td>移动到 数字 对应行数</td>
+</tr>
+<tr>
+<td align="center">:数字</td>
+<td align="center"></td>
+<td>移动到 数字 对应行数</td>
+</tr>
+</tbody></table>
+<h4 id="4-屏幕移动"><a href="#4-屏幕移动" class="headerlink" title="4) 屏幕移动"></a>4) 屏幕移动</h4><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Ctrl + b</td>
+<td align="center">back</td>
+<td>向上翻页</td>
+</tr>
+<tr>
+<td align="center">Ctrl + f</td>
+<td align="center">forward</td>
+<td>向下翻页</td>
+</tr>
+<tr>
+<td align="center">H</td>
+<td align="center">Head</td>
+<td>屏幕顶部</td>
+</tr>
+<tr>
+<td align="center">M</td>
+<td align="center">Middle</td>
+<td>屏幕中间</td>
+</tr>
+<tr>
+<td align="center">L</td>
+<td align="center">Low</td>
+<td>屏幕底部</td>
+</tr>
+</tbody></table>
+<h3 id="4-2-移动（程序）"><a href="#4-2-移动（程序）" class="headerlink" title="4.2 移动（程序）"></a>4.2 移动（程序）</h3><h4 id="1-段落移动"><a href="#1-段落移动" class="headerlink" title="1) 段落移动"></a>1) 段落移动</h4><ul>
+<li><code>vi</code> 中使用 空行 来区分段落</li>
+<li>在程序开发时，通常 <strong>一段功能相关的代码会写在一起</strong> —— 之间没有空行</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">{</td>
+<td>上一段</td>
+</tr>
+<tr>
+<td align="center">}</td>
+<td>下一段</td>
+</tr>
+</tbody></table>
+<h4 id="2-括号切换"><a href="#2-括号切换" class="headerlink" title="2) 括号切换"></a>2) 括号切换</h4><ul>
+<li>在程序世界中，<code>()</code>、<code>[]</code>、<code>&#123;&#125;</code> 使用频率很高，而且 <strong>都是成对出现的</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">%</td>
+<td>括号匹配及切换</td>
+</tr>
+</tbody></table>
+<h4 id="3-标记"><a href="#3-标记" class="headerlink" title="3) 标记"></a>3) 标记</h4><ul>
+<li>在开发时，某一块代码可能<strong>需要稍后处理</strong>，例如：编辑、查看</li>
+<li>此时先使用 <code>m</code> 增加一个标记，这样可以 <strong>在需要时快速地跳转回来</strong> 或者 <strong>执行其他编辑操作</strong></li>
+<li><strong>标记名称</strong> 可以是 <code>a~z</code> 或者 <code>A~Z</code> 之间的任意 <strong>一个</strong> 字母</li>
+<li>添加了标记的 <strong>行如果被删除</strong>，<strong>标记同时被删除</strong></li>
+<li>如果 <strong>在其他行添加了相同名称的标记</strong>，<strong>之前添加的标记也会被替换掉</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">mx</td>
+<td align="center">mark</td>
+<td>添加标记 x，x 是 a<del>z 或者 A</del>Z 之间的任意一个字母</td>
+</tr>
+<tr>
+<td align="center">‘x</td>
+<td align="center"></td>
+<td>直接定位到标记 x 所在位置</td>
+</tr>
+</tbody></table>
+<h3 id="4-3-选中文本（可视模式）"><a href="#4-3-选中文本（可视模式）" class="headerlink" title="4.3 选中文本（可视模式）"></a>4.3 选中文本（可视模式）</h3><ul>
+<li>学习 <code>复制</code> 命令前，应该先学会 <strong>怎么样选中 要复制的代码</strong></li>
+<li>在 <code>vi</code> 中要选择文本，需要先使用 <code>Visual</code> 命令切换到 <strong>可视模式</strong></li>
+<li><code>vi</code> 中提供了 <strong>三种</strong> 可视模式，可以方便程序员选择 <strong>选中文本的方式</strong></li>
+<li>按 <code>ESC</code> 可以放弃选中，返回到 <strong>命令模式</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th>模式</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">v</td>
+<td>可视模式</td>
+<td>从光标位置开始按照正常模式选择文本</td>
+</tr>
+<tr>
+<td align="center">V</td>
+<td>可视行模式</td>
+<td>选中光标经过的完整行</td>
+</tr>
+<tr>
+<td align="center">Ctrl + v</td>
+<td>可视块模式</td>
+<td>垂直方向选中文本</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>可视模式</strong>下，可以和 <strong>移动命令</strong> 连用，例如：<code>ggVG</code> 能够选中所有内容</li>
+</ul>
+<h3 id="4-4-撤销和恢复撤销"><a href="#4-4-撤销和恢复撤销" class="headerlink" title="4.4 撤销和恢复撤销"></a>4.4 撤销和恢复撤销</h3><ul>
+<li>在学习编辑命令之前，先要知道怎样撤销之前一次 <strong>错误的</strong> 编辑动作！</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">u</td>
+<td align="center">undo</td>
+<td>撤销上次命令</td>
+</tr>
+<tr>
+<td align="center">CTRL + r</td>
+<td align="center">redo</td>
+<td>恢复撤销的命令</td>
+</tr>
+</tbody></table>
+<h3 id="4-5-删除文本"><a href="#4-5-删除文本" class="headerlink" title="4.5 删除文本"></a>4.5 删除文本</h3><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">x</td>
+<td align="center">cut</td>
+<td>删除光标所在字符，或者选中文字</td>
+</tr>
+<tr>
+<td align="center">d(移动命令)</td>
+<td align="center">delete</td>
+<td>删除移动命令对应的内容</td>
+</tr>
+<tr>
+<td align="center">dd</td>
+<td align="center">delete</td>
+<td>删除光标所在行，可以 ndd 复制多行</td>
+</tr>
+<tr>
+<td align="center">D</td>
+<td align="center">delete</td>
+<td>删除至行尾</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>提示：如果使用 <strong>可视模式</strong> 已经选中了一段文本，那么无论使用 <code>d</code> 还是 <code>x</code>，都可以删除选中文本</p>
+</blockquote>
+<ul>
+<li>删除命令可以和 <strong>移动命令</strong> 连用，以下是常见的组合命令：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">* dw        # 从光标位置删除到单词末尾</span><br><span class="line">* d0        # 从光标位置删除到一行的起始位置</span><br><span class="line">* d&#125;        # 从光标位置删除到段落结尾</span><br><span class="line">* ndd       # 从光标位置向下连续删除 n 行</span><br><span class="line">* d代码行G   # 从光标所在行 删除到 指定代码行 之间的所有代码</span><br><span class="line">* d&#x27;a       # 从光标所在行 删除到 标记a 之间的所有代码</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-6-复制、粘贴"><a href="#4-6-复制、粘贴" class="headerlink" title="4.6 复制、粘贴"></a>4.6 复制、粘贴</h3><ul>
+<li><code>vi</code> 中提供有一个 <strong>被复制文本的缓冲区</strong><ul>
+<li><strong>复制</strong> 命令会将选中的文字保存在缓冲区 </li>
+<li><strong>删除</strong> 命令删除的文字会被保存在缓冲区</li>
+<li>在需要的位置，使用 <strong>粘贴</strong> 命令可以将缓冲区的文字插入到光标所在位置</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">y(移动命令)</td>
+<td align="center">copy</td>
+<td>复制</td>
+</tr>
+<tr>
+<td align="center">yy</td>
+<td align="center">copy</td>
+<td>复制一行，可以 nyy 复制多行</td>
+</tr>
+<tr>
+<td align="center">p</td>
+<td align="center">paste</td>
+<td>粘贴</td>
+</tr>
+</tbody></table>
+<p><strong>提示</strong></p>
+<ul>
+<li>命令 <code>d</code>、<code>x</code> 类似于图形界面的 <strong>剪切操作</strong> —— <code>CTRL + X</code></li>
+<li>命令 <code>y</code> 类似于图形界面的 <strong>复制操作</strong> —— <code>CTRL + C</code></li>
+<li>命令 <code>p</code> 类似于图形界面的 <strong>粘贴操作</strong> —— <code>CTRL + V</code></li>
+<li><code>vi</code> 中的 <strong>文本缓冲区同样只有一个</strong>，如果后续做过 <strong>复制、剪切</strong> 操作，之前缓冲区中的内容会被替换</li>
+</ul>
+<p><strong>注意</strong></p>
+<ul>
+<li><code>vi</code> 中的 <strong>文本缓冲区</strong> 和系统的 <strong>剪贴板</strong> 不是同一个</li>
+<li>所以在其他软件中使用 <code>CTRL + C</code> 复制的内容，不能在 <code>vi</code> 中通过 <code>P</code> 命令粘贴</li>
+<li>可以在 <strong>编辑模式</strong> 下使用 <strong>鼠标右键粘贴</strong></li>
+</ul>
+<h3 id="4-7-替换"><a href="#4-7-替换" class="headerlink" title="4.7 替换"></a>4.7 替换</h3><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">英文</th>
+<th>功能</th>
+<th>工作模式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">r</td>
+<td align="center">replace</td>
+<td>替换当前字符</td>
+<td>命令模式</td>
+</tr>
+<tr>
+<td align="center">R</td>
+<td align="center">replace</td>
+<td>替换当前行光标后的字符</td>
+<td>替换模式</td>
+</tr>
+</tbody></table>
+<ul>
+<li><code>R</code> 命令可以进入 <strong>替换模式</strong>，替换完成后，按下 <code>ESC</code> 可以回到 <strong>命令模式</strong></li>
+<li><strong>替换命令</strong> 的作用就是不用进入 <strong>编辑模式</strong>，对文件进行 <strong>轻量级的修改</strong></li>
+</ul>
+<h3 id="4-8-缩排和重复执行"><a href="#4-8-缩排和重复执行" class="headerlink" title="4.8 缩排和重复执行"></a>4.8 缩排和重复执行</h3><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&gt;&gt;</td>
+<td>向右增加缩进</td>
+</tr>
+<tr>
+<td align="center">&lt;&lt;</td>
+<td>向左减少缩进</td>
+</tr>
+<tr>
+<td align="center">.</td>
+<td>重复上次命令</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>缩排命令</strong> 在开发程序时，<strong>统一增加代码的缩进</strong> 比较有用！<ul>
+<li>一次性 <strong>在选中代码前增加 4 个空格</strong>，就叫做 <strong>增加缩进</strong></li>
+<li>一次性 <strong>在选中代码前删除 4 个空格</strong>，就叫做 <strong>减少缩进</strong></li>
+</ul>
+</li>
+<li>在 <strong>可视模式</strong> 下，缩排命令只需要使用 <strong>一个</strong> <code>&gt;</code> 或者 <code>&lt;</code> </li>
+</ul>
+<blockquote>
+<p>在程序中，<strong>缩进</strong> 通常用来表示代码的归属关系</p>
+<ul>
+<li>前面空格越少，代码的级别越高</li>
+<li>前面空格越多，代码的级别越低</li>
+</ul>
+</blockquote>
+<h3 id="4-9-查找"><a href="#4-9-查找" class="headerlink" title="4.9 查找"></a>4.9 查找</h3><h4 id="常规查找"><a href="#常规查找" class="headerlink" title="常规查找"></a>常规查找</h4><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">/str</td>
+<td>查找 str</td>
+</tr>
+</tbody></table>
+<ul>
+<li>查找到指定内容之后，使用 <code>Next</code> 查找下一个出现的位置：<ul>
+<li><code>n</code>: 查找下一个</li>
+<li><code>N</code>: 查找上一个</li>
+</ul>
+</li>
+<li>如果不想看到高亮显示，可以随便查找一个文件中不存在的内容即可</li>
+</ul>
+<h4 id="单词快速匹配"><a href="#单词快速匹配" class="headerlink" title="单词快速匹配"></a>单词快速匹配</h4><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">*</td>
+<td>向后查找当前光标所在单词</td>
+</tr>
+<tr>
+<td align="center">#</td>
+<td>向前查找当前光标所在单词</td>
+</tr>
+</tbody></table>
+<ul>
+<li>在开发中，通过单词快速匹配，可以快速看到这个单词在其他什么位置使用过</li>
+</ul>
+<h3 id="4-10-查找并替换"><a href="#4-10-查找并替换" class="headerlink" title="4.10 查找并替换"></a>4.10 查找并替换</h3><ul>
+<li>在 <code>vi</code> 中查找和替换命令需要在 <strong>末行模式</strong> 下执行</li>
+<li>记忆命令格式：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">:%s///g</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-全局替换"><a href="#1-全局替换" class="headerlink" title="1) 全局替换"></a>1) 全局替换</h4><ul>
+<li><strong>一次性</strong>替换文件中的 <strong>所有出现的旧文本</strong></li>
+<li>命令格式如下：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">:%s/旧文本/新文本/g</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-可视区域替换"><a href="#2-可视区域替换" class="headerlink" title="2) 可视区域替换"></a>2) 可视区域替换</h4><ul>
+<li><strong>先选中</strong> 要替换文字的 <strong>范围</strong></li>
+<li>命令格式如下：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">:s/旧文本/新文本/g</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-确认替换"><a href="#3-确认替换" class="headerlink" title="3) 确认替换"></a>3) 确认替换</h4><ul>
+<li>如果把末尾的 <code>g</code> 改成 <code>gc</code> 在替换的时候，会有提示！<strong>推荐使用！</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">:%s/旧文本/新文本/gc</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>y</code> - <code>yes</code> 替换</li>
+<li><code>n</code> - <code>no</code> 不替换</li>
+<li><code>a</code> - <code>all</code> 替换所有</li>
+<li><code>q</code> - <code>quit</code> 退出替换</li>
+<li><code>l</code> - <code>last</code> 最后一个，并把光标移动到行首</li>
+<li><code>^E</code> 向下滚屏</li>
+<li><code>^Y</code> 向上滚屏</li>
+</ol>
+<h3 id="4-11-插入命令"><a href="#4-11-插入命令" class="headerlink" title="4.11 插入命令"></a>4.11 插入命令</h3><ul>
+<li>在 <code>vi</code> 中除了常用的 <code>i</code> 进入 <strong>编辑模式</strong> 外，还提供了以下命令同样可以进入编辑模式：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">英文</th>
+<th>功能</th>
+<th align="center">常用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">i</td>
+<td align="center">insert</td>
+<td>在当前字符前插入文本</td>
+<td align="center">常用</td>
+</tr>
+<tr>
+<td align="center">I</td>
+<td align="center">insert</td>
+<td>在行首插入文本</td>
+<td align="center">较常用</td>
+</tr>
+<tr>
+<td align="center">a</td>
+<td align="center">append</td>
+<td>在当前字符后添加文本</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">A</td>
+<td align="center">append</td>
+<td>在行末添加文本</td>
+<td align="center">较常用</td>
+</tr>
+<tr>
+<td align="center">o</td>
+<td align="center"></td>
+<td>在当前行后面插入一空行</td>
+<td align="center">常用</td>
+</tr>
+<tr>
+<td align="center">O</td>
+<td align="center"></td>
+<td>在当前行前面插入一空行</td>
+<td align="center">常用</td>
+</tr>
+</tbody></table>
+<p><img src="media/14993340485745/004_%E6%8F%92%E5%85%A5%E5%91%BD%E4%BB%A4.png" alt="004_插入命令-w400"></p>
+<h4 id="演练-1-——-编辑命令和数字连用"><a href="#演练-1-——-编辑命令和数字连用" class="headerlink" title="演练 1 —— 编辑命令和数字连用"></a>演练 1 —— 编辑命令和数字连用</h4><ul>
+<li>在开发中，可能会遇到连续输入 <code>N</code> 个同样的字符</li>
+</ul>
+<blockquote>
+<p>在 <code>Python</code> 中有简单的方法，但是其他语言中通常需要自己输入</p>
+</blockquote>
+<ul>
+<li>例如：<code>**********</code> 连续 10 个星号</li>
+</ul>
+<p>要实现这个效果可以在 <strong>命令模式</strong> 下</p>
+<ol>
+<li>输入 <code>10</code>，表示要重复 10 次</li>
+<li>输入 <code>i</code> 进入 <strong>编辑模式</strong></li>
+<li>输入 <code>*</code> 也就是重复的文字</li>
+<li>按下 <code>ESC</code> 返回到 <strong>命令模式</strong>，返回之后 <code>vi</code> 就会把第 <code>2、3</code> 两步的操作重复 <code>10</code> 次</li>
+</ol>
+<blockquote>
+<p>提示：正常开发时，在 <strong>进入编辑模式之前，不要按数字</strong></p>
+</blockquote>
+<h4 id="演练-2-——-利用-可视块-给多行代码增加注释"><a href="#演练-2-——-利用-可视块-给多行代码增加注释" class="headerlink" title="演练 2 —— 利用 可视块 给多行代码增加注释"></a>演练 2 —— 利用 可视块 给多行代码增加注释</h4><ul>
+<li>在开发中，可能会遇到一次性给多行代码 <strong>增加注释</strong> 的情况</li>
+</ul>
+<blockquote>
+<p>在 <code>Python</code> 中，要给代码增加注释，可以在代码前增加一个 <code># </code></p>
+</blockquote>
+<p>要实现这个效果可以在 <strong>命令模式</strong> 下</p>
+<ol>
+<li>移动到要添加注释的 <strong>第 1 行代码</strong>，按 <code>^</code> 来到行首</li>
+<li>按 <code>CTRL + v</code> 进入 <strong>可视块</strong> 模式</li>
+<li>使用 <code>j</code> 向下连续选中要添加的代码行</li>
+<li>输入 <code>I</code> 进入 <strong>编辑模式</strong>，并在 <strong>行首插入</strong>，注意：一定要使用 <strong>I</strong></li>
+<li>输入 <code># </code> 也就是注释符号</li>
+<li>按下 <code>ESC</code> 返回到 <strong>命令模式</strong>，返回之后 <code>vi</code> 会在之前选中的每一行代码 <strong>前</strong> 插入 <code># </code></li>
+</ol>
+<h2 id="05-分屏命令"><a href="#05-分屏命令" class="headerlink" title="05. 分屏命令"></a>05. 分屏命令</h2><ul>
+<li>属于 <code>vi</code> 的高级命令 —— 可以 <strong>同时编辑和查看多个文件</strong></li>
+</ul>
+<h3 id="5-1-末行命令扩展"><a href="#5-1-末行命令扩展" class="headerlink" title="5.1 末行命令扩展"></a>5.1 末行命令扩展</h3><p><strong>末行命令</strong> 主要是针对文件进行操作的：<strong>保存</strong>、<strong>退出</strong>、<strong>保存&amp;退出</strong>、<strong>搜索&amp;替换</strong>、<strong>另存</strong>、<strong>新建</strong>、<strong>浏览文件</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">:e .</td>
+<td align="center">edit</td>
+<td>会打开内置的文件浏览器，浏览要当前目录下的文件</td>
+</tr>
+<tr>
+<td align="center">:n 文件名</td>
+<td align="center">new</td>
+<td>新建文件</td>
+</tr>
+<tr>
+<td align="center">:w 文件名</td>
+<td align="center">write</td>
+<td>另存为，但是仍然编辑当前文件，并不会切换文件</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>提示：切换文件之前，必须保证当前这个文件已经被保存！</p>
+</blockquote>
+<ul>
+<li>已经学习过的 <strong>末行命令</strong>：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">:w</td>
+<td align="center">write</td>
+<td>保存</td>
+</tr>
+<tr>
+<td align="center">:q</td>
+<td align="center">quit</td>
+<td>退出，如果没有保存，不允许退出</td>
+</tr>
+<tr>
+<td align="center">:q!</td>
+<td align="center">quit</td>
+<td>强行退出，不保存退出</td>
+</tr>
+<tr>
+<td align="center">:wq</td>
+<td align="center">write &amp; quit</td>
+<td>保存并退出</td>
+</tr>
+<tr>
+<td align="center">:x</td>
+<td align="center"></td>
+<td>保存并退出</td>
+</tr>
+<tr>
+<td align="center">:%s///gc</td>
+<td align="center"></td>
+<td>确认搜索并替换</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>在实际开发中，可以使用 <code>w</code> 命令 <strong>阶段性的备份代码</strong></p>
+</blockquote>
+<h3 id="5-2-分屏命令"><a href="#5-2-分屏命令" class="headerlink" title="5.2 分屏命令"></a>5.2 分屏命令</h3><ul>
+<li>使用 <strong>分屏命令</strong>，可以 <strong>同时编辑和查看多个文件</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">:sp [文件名]</td>
+<td align="center">split</td>
+<td>横向增加分屏</td>
+</tr>
+<tr>
+<td align="center">:vsp [文件名]</td>
+<td align="center">vertical split</td>
+<td>纵向增加分屏</td>
+</tr>
+</tbody></table>
+<h4 id="1-切换分屏窗口"><a href="#1-切换分屏窗口" class="headerlink" title="1) 切换分屏窗口"></a>1) 切换分屏窗口</h4><blockquote>
+<p>分屏窗口都是基于 <code>CTRL + W</code> 这个快捷键的，<code>w</code> 对应的英文单词是 <code>window</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">w</td>
+<td align="center">window</td>
+<td>切换到下一个窗口</td>
+</tr>
+<tr>
+<td align="center">r</td>
+<td align="center">reverse</td>
+<td>互换窗口</td>
+</tr>
+<tr>
+<td align="center">c</td>
+<td align="center">close</td>
+<td>关闭当前窗口，但是不能关闭最后一个窗口</td>
+</tr>
+<tr>
+<td align="center">q</td>
+<td align="center">quit</td>
+<td>退出当前窗口，如果是最后一个窗口，则关闭 vi</td>
+</tr>
+<tr>
+<td align="center">o</td>
+<td align="center">other</td>
+<td>关闭其他窗口</td>
+</tr>
+</tbody></table>
+<h4 id="2-调整窗口大小"><a href="#2-调整窗口大小" class="headerlink" title="2) 调整窗口大小"></a>2) 调整窗口大小</h4><blockquote>
+<p>分屏窗口都是基于 <code>CTRL + W</code> 这个快捷键的，<code>w</code> 对应的英文单词是 <code>window</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">+</td>
+<td align="center"></td>
+<td>增加窗口高度</td>
+</tr>
+<tr>
+<td align="center">-</td>
+<td align="center"></td>
+<td>减少窗口高度</td>
+</tr>
+<tr>
+<td align="center">&gt;</td>
+<td align="center"></td>
+<td>增加窗口宽度</td>
+</tr>
+<tr>
+<td align="center">&lt;</td>
+<td align="center"></td>
+<td>减少窗口宽度</td>
+</tr>
+<tr>
+<td align="center">=</td>
+<td align="center"></td>
+<td>等分窗口大小</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>调整窗口宽高的命令可以和数字连用，例如：<code>5 CTRL + W +</code> 连续 5 次增加高度</p>
+</blockquote>
+<h2 id="06-常用命令速查图"><a href="#06-常用命令速查图" class="headerlink" title="06. 常用命令速查图"></a>06. 常用命令速查图</h2><p><img src="media/14993340485745/vim.png" alt="vi"></p>
+<h3 id="vimrc"><a href="#vimrc" class="headerlink" title="vimrc"></a>vimrc</h3><ul>
+<li><code>vimrc</code> 是 <code>vim</code> 的配置文件，可以设置 vim 的配置，包括：<strong>热键</strong>、<strong>配色</strong>、<strong>语法高亮</strong>、<strong>插件</strong> 等</li>
+<li><code>Linux</code> 中 <code>vimrc</code> 有两个位置，<strong>家目录下的配置文件优先级更高</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/etc/vim/vimrc</span><br><span class="line">~/.vimrc</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>常用的插件有：<ul>
+<li>代码补全</li>
+<li>代码折叠</li>
+<li>搜索</li>
+<li>Git 集成</li>
+<li>……</li>
+</ul>
+</li>
+<li>网上有很多高手已经配置好的针对 <code>python</code> 开发的 <code>vimrc</code> 文件，可以下载过来直接使用，或者等大家多 <code>Linux</code> 比较熟悉后，再行学习！</li>
+</ul>
+]]></content>
+      <categories>
+        <category>vim</category>
+      </categories>
+      <tags>
+        <tag>vim</tag>
+      </tags>
+  </entry>
+</search>

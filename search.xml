@@ -1,56 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Gradle 脚本指南</title>
-    <url>/2020/06/28/Gradle%E8%84%9A%E6%9C%AC%E6%8C%87%E5%8D%97/</url>
-    <content><![CDATA[<h2 id="Gradle-执行说明"><a href="#Gradle-执行说明" class="headerlink" title="Gradle 执行说明"></a>Gradle 执行说明</h2><h2 id="build-gradle-脚本说明"><a href="#build-gradle-脚本说明" class="headerlink" title="build.gradle 脚本说明"></a>build.gradle 脚本说明</h2><h3 id="配置仓库"><a href="#配置仓库" class="headerlink" title="配置仓库"></a>配置仓库</h3><ul>
-<li>gradle实现离线仓库还可以调用maven的离线仓库</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">repositories &#123;</span><br><span class="line">    mavenLocal() <span class="comment">//直接使用本地maven仓库</span></span><br><span class="line">    maven &#123; url <span class="string">&quot;http://maven.aliyun.com/nexus/content/groups/public&quot;</span> &#125;	<span class="comment">//使用国内镜像仓库</span></span><br><span class="line">    mavenCentral()	<span class="comment">//直接使用国外中央仓库</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>使用mavenLocal() 时Gradle默认会按以下顺序去查找本地的maven仓库：${USER_HOME}/.m2/settings.xml &gt;&gt; M2_HOME/conf/settings.xml &gt;&gt; ${USER_HOME}/.m2/repository。注意，环境变量要加入M2_HOME， 我们配环境时很多时候都是使用MAVEN_HOME或者直接在path中输入bin路径了，导致mavenLocal无法生效。</p>
-</li>
-<li><p>如果本地没有相关jar包，gradle会下载到${USER_HOME}/.gradle文件夹下，若想让gradle下载到指定文件夹，配置GRADLE_USER_HOME环境变量</p>
-</li>
-</ul>
-<h3 id="dependencies-命令说明"><a href="#dependencies-命令说明" class="headerlink" title="dependencies 命令说明"></a>dependencies 命令说明</h3><ol>
-<li><p><strong>implementation</strong><br>这个指令的特点就是，对于使用了该命令编译的依赖，对该项目有依赖的项目将无法访问到使用该命令编译的依赖中的任何程序，也就是将该依赖隐藏在内部，而不对外部公开。</p>
-</li>
-<li><p><strong>api</strong><br>完全等同于compile指令。</p>
-</li>
-<li><p><strong>compile</strong><br>这种是我们最常用的方式，使用该方式依赖的库将会参与编译和打包。</p>
-</li>
-<li><p><strong>testCompile</strong><br>只在单元测试代码的编译以及最终打包测试时有效。</p>
-</li>
-<li><p><strong>debugCompile</strong><br>只在debug模式的编译和最终的debug打包时有效。</p>
-</li>
-<li><p><strong>releaseCompile</strong><br>仅仅针对Release模式的编译和最终的Release打包。</p>
-</li>
-<li><p><strong>provided</strong><br>只在编译时有效，不会参与打包，可以在自己的moudle中使用该方式依赖。</p>
-</li>
-<li><p><strong>apk（runtimeOnly）</strong></p>
-<p>只在生成apk的时候参与打包，编译时不会参与，很少用。</p>
-</li>
-</ol>
-<h2 id="19版IDEA-Feature介绍"><a href="#19版IDEA-Feature介绍" class="headerlink" title="19版IDEA Feature介绍"></a>19版IDEA Feature介绍</h2>]]></content>
-      <tags>
-        <tag>项目构建</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Git操作命令</title>
     <url>/2020/06/28/Git%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/</url>
     <content><![CDATA[<p><strong>工作区 ==&gt;&gt;&gt; 暂存区 ==&gt;&gt;&gt; 本地版本库 ==&gt;&gt;&gt; 远程版本库</strong></p>
-<h3 id="git-init（初始化）"><a href="#git-init（初始化）" class="headerlink" title="git init（初始化）"></a>git init（初始化）</h3><h5 id="场景一：把已有的项目代码纳入Git管理"><a href="#场景一：把已有的项目代码纳入Git管理" class="headerlink" title="场景一：把已有的项目代码纳入Git管理"></a>场景一：把已有的项目代码纳入Git管理</h5><ul>
+<h3 id="git-init（初始化）"><a href="#git-init（初始化）" class="headerlink" title="git init（初始化）"></a>git init（初始化）</h3><ol>
+<li>场景一：把已有的项目代码纳入Git管理<ul>
 <li>cd 项目代码所在目录</li>
 <li>git init</li>
 </ul>
-<h5 id="场景二：新建项目直接用Git管理"><a href="#场景二：新建项目直接用Git管理" class="headerlink" title="场景二：新建项目直接用Git管理"></a>场景二：新建项目直接用Git管理</h5><ul>
+</li>
+<li>场景二：新建项目直接用Git管理<ul>
 <li>cd 工作空间目录</li>
 <li>git init project_name（创建项目并纳入Git管理）</li>
 <li>cd project_name</li>
 </ul>
+</li>
+</ol>
 <h3 id="git-config（用户配置）"><a href="#git-config（用户配置）" class="headerlink" title="git config（用户配置）"></a>git config（用户配置）</h3><ul>
 <li>git config –local user.name  ‘’（只对某个仓库生效）</li>
 <li>git config –local user.email ‘’（只对某个仓库生效）</li>
@@ -166,7 +132,7 @@
 <li>git diff HEAD HEAD~2（当前版本与祖父版本比对）</li>
 <li>gitk –all（图形化界面）</li>
 </ul>
-<h3 id="git目录结构"><a href="#git目录结构" class="headerlink" title=".git目录结构"></a>.git目录结构</h3><p>./HEAD（记录当前分支名称，更改该文件与checkout 分支名 具有同样的效果）</p>
+<h3 id="git目录结构"><a href="#git目录结构" class="headerlink" title="git目录结构"></a>git目录结构</h3><p>./HEAD（记录当前分支名称，更改该文件与checkout 分支名 具有同样的效果）</p>
 <p>./config（本仓库的配置）</p>
 <p>./refs（存放各个分支和Tag的信息）</p>
 <p>./refs/heads</p>
@@ -180,17 +146,55 @@
 <p>./objects（）</p>
 ]]></content>
       <categories>
-        <category>版本控制工具</category>
+        <category>开发工具</category>
       </categories>
       <tags>
         <tag>Git</tag>
       </tags>
   </entry>
   <entry>
+    <title>Gradle 脚本指南</title>
+    <url>/2020/06/28/Gradle%E8%84%9A%E6%9C%AC%E6%8C%87%E5%8D%97/</url>
+    <content><![CDATA[<h2 id="Gradle-执行说明"><a href="#Gradle-执行说明" class="headerlink" title="Gradle 执行说明"></a>Gradle 执行说明</h2><h2 id="build-gradle-脚本说明"><a href="#build-gradle-脚本说明" class="headerlink" title="build.gradle 脚本说明"></a>build.gradle 脚本说明</h2><h3 id="配置仓库"><a href="#配置仓库" class="headerlink" title="配置仓库"></a>配置仓库</h3><ul>
+<li>gradle实现离线仓库还可以调用maven的离线仓库</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">repositories &#123;</span><br><span class="line">    mavenLocal() <span class="comment">//直接使用本地maven仓库</span></span><br><span class="line">    maven &#123; url <span class="string">&quot;http://maven.aliyun.com/nexus/content/groups/public&quot;</span> &#125;	<span class="comment">//使用国内镜像仓库</span></span><br><span class="line">    mavenCentral()	<span class="comment">//直接使用国外中央仓库</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>使用mavenLocal() 时Gradle默认会按以下顺序去查找本地的maven仓库：${USER_HOME}/.m2/settings.xml &gt;&gt; M2_HOME/conf/settings.xml &gt;&gt; ${USER_HOME}/.m2/repository。注意，环境变量要加入M2_HOME， 我们配环境时很多时候都是使用MAVEN_HOME或者直接在path中输入bin路径了，导致mavenLocal无法生效。</p>
+</li>
+<li><p>如果本地没有相关jar包，gradle会下载到${USER_HOME}/.gradle文件夹下，若想让gradle下载到指定文件夹，配置GRADLE_USER_HOME环境变量</p>
+</li>
+</ul>
+<h3 id="dependencies-命令说明"><a href="#dependencies-命令说明" class="headerlink" title="dependencies 命令说明"></a>dependencies 命令说明</h3><ol>
+<li><p><strong>implementation</strong><br>这个指令的特点就是，对于使用了该命令编译的依赖，对该项目有依赖的项目将无法访问到使用该命令编译的依赖中的任何程序，也就是将该依赖隐藏在内部，而不对外部公开。</p>
+</li>
+<li><p><strong>api</strong><br>完全等同于compile指令。</p>
+</li>
+<li><p><strong>compile</strong><br>这种是我们最常用的方式，使用该方式依赖的库将会参与编译和打包。</p>
+</li>
+<li><p><strong>testCompile</strong><br>只在单元测试代码的编译以及最终打包测试时有效。</p>
+</li>
+<li><p><strong>debugCompile</strong><br>只在debug模式的编译和最终的debug打包时有效。</p>
+</li>
+<li><p><strong>releaseCompile</strong><br>仅仅针对Release模式的编译和最终的Release打包。</p>
+</li>
+<li><p><strong>provided</strong><br>只在编译时有效，不会参与打包，可以在自己的moudle中使用该方式依赖。</p>
+</li>
+<li><p><strong>apk（runtimeOnly）</strong></p>
+<p>只在生成apk的时候参与打包，编译时不会参与，很少用。</p>
+</li>
+</ol>
+<h2 id="19版IDEA-Feature介绍"><a href="#19版IDEA-Feature介绍" class="headerlink" title="19版IDEA Feature介绍"></a>19版IDEA Feature介绍</h2>]]></content>
+      <tags>
+        <tag>项目构建</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo-Next排坑记录</title>
     <url>/2021/05/26/Hexo-Next%E6%8E%92%E5%9D%91%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<p>Hexo构建博客</p>
-<p>优秀前辈的博客：<br><a href="https://www.zhyong.cn/">https://www.zhyong.cn/</a><br><a href="https://siriusq.top/">https://siriusq.top/</a></p>
+<p>优秀前辈的博客：<br><a href="https://www.zhyong.cn/">https://www.zhyong.cn/</a><br><a href="https://siriusq.top/">https://siriusq.top/</a><br>优秀404<br><a href="https://blog.csdn.net/hehung/article/details/103430545">https://blog.csdn.net/hehung/article/details/103430545</a></p>
 <h3 id="问题记录"><a href="#问题记录" class="headerlink" title="问题记录"></a>问题记录</h3><h4 id="hexo换主题乱码问题的解决"><a href="#hexo换主题乱码问题的解决" class="headerlink" title="hexo换主题乱码问题的解决"></a>hexo换主题乱码问题的解决</h4><ul>
 <li><p>问题表现</p>
 <p>% extends ‘_layout.swig’  import ‘_macro/post.swig’ as post_template </p>
@@ -209,7 +213,18 @@
 <h4 id="Hexo-Next-主题分页显示异常"><a href="#Hexo-Next-主题分页显示异常" class="headerlink" title="Hexo Next 主题分页显示异常"></a>Hexo Next 主题分页显示异常</h4><p>改动目录：themes\next\layout_partials\pagination.swig</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% if page.prev or page.next %&#125;</span><br><span class="line">  &lt;nav class=&quot;pagination&quot;&gt;</span><br><span class="line">    &#123;&#123;</span><br><span class="line">      paginator(&#123;</span><br><span class="line">        prev_text: &#x27;&lt;&#x27;,</span><br><span class="line">        next_text: &#x27;&gt;&#x27;,</span><br><span class="line">        mid_size: 1</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;&#125;</span><br><span class="line">  &lt;/nav&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
 
-]]></content>
+<h4 id="Hexo-douban-数据爬取失败"><a href="#Hexo-douban-数据爬取失败" class="headerlink" title="Hexo douban 数据爬取失败"></a>Hexo douban 数据爬取失败</h4><p>指定NodeJs 版本（<strong>NodeJs版本需在v12.18.0</strong>）</p>
+<p>首先 node -v 查看当前版本，如果当前版本不合适可以安装指定版本的nodejs</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//清除</span><br><span class="line">sudo npm cache clean --force</span><br></pre></td></tr></table></figure>
+
+<p>升级之前需要安装n模块</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//安装n 模块</span><br><span class="line">sudo npm install -g n</span><br><span class="line">//查看版本</span><br><span class="line">n -V</span><br></pre></td></tr></table></figure>
+
+<p>安装指定版本</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo n 12.18.0</span><br><span class="line">//查看node版本</span><br><span class="line">node -v		//v12.18.0</span><br></pre></td></tr></table></figure>
+
+<p>在博客中重新拉去</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo douban &amp;&amp; hexo g &amp;&amp; hexo s</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>hexo入坑指南</category>
       </categories>
@@ -218,27 +233,60 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2021/05/26/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    <title>iTerm2快捷键</title>
+    <url>/2021/06/04/ITerm2%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
+    <content><![CDATA[<h3 id="光标控制"><a href="#光标控制" class="headerlink" title="光标控制"></a>光标控制</h3><ul>
+<li>ctrl + a: 到行首</li>
+<li>ctrl + e: 行末</li>
+<li>ctrl + f/b: 前进后退，相当于左右方向键，但是显然比移开手按方向键更快</li>
+<li>ctrl + p: 上一条命令，相当于方向键上</li>
+<li>ctrl + r: 搜索命令历史，这个大家都应该很熟悉了</li>
+<li>ctrl + d: 删除当前字符</li>
+<li>ctrl + h: 删除之前的字符</li>
+<li>ctrl + w: 删除光标前的单词</li>
+<li>ctrl + k: 删除到文本末尾</li>
+<li>ctrl + t: 交换光标处文本</li>
+<li>⌘ + —/+/0: 调整字体大小</li>
+<li>⌘ + r:清屏，其实是滚到新的一屏，并没有清空。ctrl + l 也可以做到。</li>
+</ul>
+<h3 id="窗口操作"><a href="#窗口操作" class="headerlink" title="窗口操作"></a>窗口操作</h3><ul>
+<li>新建窗口：shift + command + d（横向）command + d（竖向）</li>
+<li>关闭窗口：shift + command + w</li>
+<li>前一个窗口：command + `</li>
+<li>后一个窗口：command + ~</li>
+<li>进入窗口 1,2,3：option + command + 编号</li>
+</ul>
+<h3 id="标签页操作"><a href="#标签页操作" class="headerlink" title="标签页操作"></a>标签页操作</h3><ul>
+<li>新建标签页: Command + T</li>
+<li>关闭标签页: Command + W</li>
+<li>前一个标签页: Command + 左方向键，Shift + Command + [</li>
+<li>后一个标签页: Command + 右方向键，Shitf + Command + ]</li>
+<li>进入标签页1，2，3…: Command + 标签页编号 *Expose 标签页: Option + Command + E（将标签页打撒到全屏，并可以全局搜索所有的标签页）</li>
+</ul>
+<h3 id="面板操作"><a href="#面板操作" class="headerlink" title="面板操作"></a>面板操作</h3><ul>
+<li>垂直分割: Command + D</li>
+<li>水平分割: Shift + Command + D</li>
+<li>前一个面板: Command + [</li>
+<li>后一个面板: Command + ]</li>
+<li>切换到上/下/左/右面板: Option + Command + 上下左右方向键</li>
+</ul>
+<h3 id="其他功能"><a href="#其他功能" class="headerlink" title="其他功能"></a>其他功能</h3><ul>
+<li>支持自定义全局快捷键用于显示和隐藏iTerm2 Preference -&gt; Keys －&gt; Show/hide iTerm2 with a system-wide hotkey 打上勾之后</li>
+<li>进入和退出全屏: Command + Enter</li>
+<li>查看当前终端中光标的位置: Command + /</li>
+<li>命令自动补全: Command + ;（很少用这个，还是感觉Zsh的补全更好用）</li>
+<li>开启和关闭背景半透明: Command + u</li>
+<li>清屏（重置当前终端）: Command + r</li>
+</ul>
+<h3 id="位置书签"><a href="#位置书签" class="headerlink" title="位置书签"></a>位置书签</h3><p>在当前会话中按Command + Shift + m可以保存当前位置，之后可以按Command + Shift + j跳回这个位置。</p>
+<h3 id="粘贴历史"><a href="#粘贴历史" class="headerlink" title="粘贴历史"></a>粘贴历史</h3><p>使用Command + Shift + h 可以呼出粘贴历史，支持模糊检索。还可以设置将粘贴历史保存在磁盘上（Preferences -&gt; General）</p>
+<h3 id="即时回放"><a href="#即时回放" class="headerlink" title="即时回放"></a>即时回放</h3><p>使用Command + Opt + b 打开即时回放，按Esc退出。即时回放可以记录终端输出的状态，让你“穿越时间”查看终端内容。默认每个会话最多储存4MB的内容，可以在设置中更改（Preferences -&gt; Genernal -&gt; Instant Replay）</p>
 ]]></content>
       <categories>
-        <category>hexo入坑指南</category>
+        <category>开发工具</category>
       </categories>
       <tags>
-        <tag>神引篇</tag>
+        <tag>iTerm2</tag>
       </tags>
   </entry>
   <entry>
@@ -478,25 +526,145 @@
       </tags>
   </entry>
   <entry>
-    <title>设计模式-单例模式</title>
-    <url>/2021/05/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</url>
-    <content><![CDATA[]]></content>
+    <title>Hello World</title>
+    <url>/2021/05/26/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
       <categories>
-        <category>设计模式-创建型</category>
+        <category>hexo入坑指南</category>
       </categories>
       <tags>
-        <tag>设计模式</tag>
+        <tag>神引篇</tag>
       </tags>
   </entry>
   <entry>
-    <title>设计模式-原型模式</title>
-    <url>/2021/05/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/</url>
-    <content><![CDATA[]]></content>
+    <title>突破第二天</title>
+    <url>/2021/06/03/%E7%AA%81%E7%A0%B4%E7%AC%AC%E4%BA%8C%E5%A4%A9/</url>
+    <content><![CDATA[<ol>
+<li><p>The contribution distributor thinks the microcomputer pollution is absolutely.</p>
+<p>释义：捐款分配者认为微机污染是绝对不容置疑的</p>
+</li>
+<li><p>He repeatedly repeats, “Eat meat”.</p>
+<p>释义：他再三重复说：“吃肉”</p>
+</li>
+<li><p>Having canceled X-ray scan, the cancerous candidate on the canvas ate(eat) the idle candles in the candy can.</p>
+<p>释义：取消X射线扫描后，帆布上的癌症候选者吃了糖果罐里的闲置蜡烛</p>
+</li>
+<li><p>The dominant candidate is nominally nominated for president.</p>
+<p>释义：占优势的候选人名义上被任命为总统</p>
+</li>
+<li><p>The extravagant savage made the interior and exterior criteria of deterioration.</p>
+</li>
+<li><p>No, nobody’s body is noble, nor is his.</p>
+</li>
+<li><p>Axe the tax on taxis. Wax may relax the body.</p>
+</li>
+<li><p>The man in mask asked me for a task; I let him put the basket on the desk in the dusk.</p>
+</li>
+<li><p>The lump jumped off the pump and bumped on the trumpet in the dump.</p>
+</li>
+<li><p>On my request the conqueror questioned the man who jumped the queue.</p>
+</li>
+<li><p>They are arguing about the document of the monumental instrument.</p>
+</li>
+<li><p>However, Lever never fevers; nevertheless, he is clever forever.</p>
+</li>
+<li><p>I never mind your unkind reminding that my grindstone hinders your cylinder.</p>
+</li>
+<li><p>I feed the food to the bleeding man in the flood.</p>
+</li>
+<li><p>It’s a treason terror(恐怖) of the seasonal oversea seafood is reasonable.</p>
+</li>
+<li><p>The veteran in velvet found that the diameter of the thermometer was one metre.</p>
+</li>
+<li><p>The cube in the tubular cup occupies one cubic meter.</p>
+</li>
+<li><p>Put the spotless potatoes, tomatoes and tobacco atoms into the hot pot.</p>
+</li>
+<li><p>The preacher preached to the teacher’s teacup.</p>
+</li>
+<li><p>“My behavior is on behalf of half zebras,” the algebra teacher said.</p>
+</li>
+<li><p>Unlike my uncle, I likely like that bike (bicycle).</p>
+</li>
+<li><p>She likes nothing but things of clothing and cloth.</p>
+</li>
+<li><p>The doctor’s doctrine undid one dollar and a dozen of collars.</p>
+</li>
+<li><p>On the bus the busy businessman did a business with the buyer.</p>
+<p>释义：公共汽车上忙碌的商人与买主做了一笔交易</p>
+</li>
+<li><p>Vegetables and tablets on the stably established table show no instability.</p>
+</li>
+<li><p>Primarily, the prime criminal’s crime has nothing to do with lime and overtime.</p>
+</li>
+<li><p>The ring on the spring string rings during springtime.</p>
+</li>
+<li><p>Shut in the hut, I’m puzzled how to cut down the output of nuts.</p>
+</li>
+<li><p>It’s better to put letters at the inlet and outlet.</p>
+</li>
+<li><p>During this serious period, the superierrorries of questions about the supermarket.</p>
+</li>
+<li><p>I tuned the tone of the stone phone with a bone.</p>
+</li>
+<li><p>On Revenue avenue, the grave traveler jumped the gravestone bravely.</p>
+</li>
+<li><p>The slave safely saved the sharp shavers in a cave nearby the cafeteria.</p>
+</li>
+<li><p>Most hosts are hostile to the foremost ghost hostage almost to the utmost.</p>
+</li>
+<li><p>The mapper trapped in the gap tapped the tap wrapper with strap.</p>
+</li>
+<li><p>The scout with shoulder-straps shouted on the outermost route as a routine.</p>
+</li>
+<li><p>The reproached coach unloaded the loaves(loaf) to the approachable roadside.</p>
+</li>
+<li><p>The news about the broadened breadth is broadcast abroad.</p>
+</li>
+<li><p>The motive of the emotional movie is to move the removed men.</p>
+</li>
+<li><p>Otherwise, mother will go to another movie together with brother.</p>
+</li>
+<li><p>Furthermore, we gathered leather and feather for the future colder weather.</p>
+</li>
+<li><p>Before the premier, the old soldier scolds the cold weather.</p>
+</li>
+<li><p>Whether the weather is good or bad, neither father nor I am going to the gathering.</p>
+</li>
+<li><p>The Particle party’s partner participated in the particular Parliament.</p>
+</li>
+<li><p>For convenience of intensive study, he has an intense intention of making friend with me.</p>
+</li>
+<li><p>The virtueless girl’s duty is to wash the dirty shirts and skirts in the outskirts.</p>
+</li>
+<li><p>I glimpsed the dancer balancing herself on the ambulance by chance.</p>
+</li>
+<li><p>Balloon, baseball, basketball, football and volleyball all dance ballet on the volcano.</p>
+<p>释义：气球、棒球、篮球、足球和排球都在火山上跳芭蕾舞</p>
+</li>
+<li><p>A gallon of gasoline and the nylon overalls fall into the valley.</p>
+<p>释义：一加仑汽油和尼龙工作裤落进了山谷</p>
+</li>
+</ol>
+]]></content>
       <categories>
-        <category>设计模式-创建型</category>
+        <category>English</category>
       </categories>
       <tags>
-        <tag>设计模式</tag>
+        <tag>English</tag>
       </tags>
   </entry>
   <entry>
@@ -504,31 +672,46 @@
     <url>/2021/05/28/%E7%AA%81%E7%A0%B4%E8%87%AA%E5%B7%B1%EF%BC%88%E4%B8%80%EF%BC%89/</url>
     <content><![CDATA[<ol>
 <li><p>With my own ears I clearly heard the heart beat of the nuclear bom.</p>
-<p>释义：我亲耳</p>
+<p>释义：我亲耳清晰的听到那原子弹的心跳声</p>
 </li>
 <li><p>Next year the bearded bear will bear a dear baby in the rear.</p>
 <p>释义：</p>
 </li>
 <li><p>Early I searched through the earth for earthware so as to research in earthquake.</p>
-<p>释义：</p>
+<p>释义：早先我在泥土中搜寻陶器以研究地震</p>
+<p>Earthware  陶器</p>
 </li>
 <li><p>I learn that learned earnest men earn much by learning.</p>
-<p>释义：</p>
+<p>释义：我知道有学问而有认真的人靠学问挣了很多钱</p>
+<p>learn 学;学习;学到;学会;听到;得知;获悉;记住;背熟;熟记</p>
+<p>learned 有学问的、知识渊博的、博学的、学者的、学术性的、学问精深的</p>
+<p>earnest 非常认真的、认真；诚实的、真诚的 ; 热心；定钱、保证金 ; </p>
+<p>earned 挣得;赚得;挣钱;生(利);获(利);应得;博得;赢得</p>
 </li>
 <li><p>She swears to wear the pearls that appear to be pears.</p>
-<p>释义：</p>
+<p>释义：她发誓要戴那些看起来像梨子的珍珠</p>
+<p>swears 发誓</p>
+<p>appear to 相似、像</p>
 </li>
 <li><p>I nearly fear to tear the tearful girl’s test paper.</p>
-<p>释义：</p>
+<p>释义：我近乎害怕去撕那个泪流满面的女孩的试卷</p>
+<p>tear 撕碎</p>
+<p>tearful 泪流满面的</p>
 </li>
 <li><p>The bold folk fold up the gold and hold it in hand.</p>
 <p>释义：</p>
 </li>
 <li><p>The customers are accustomed to the disgusting custom.</p>
-<p>释义：</p>
+<p>释义：顾客们习惯了令人讨厌的风俗</p>
+<p>accustomed 习惯</p>
+<p>disgusting custom 令人讨厌的风俗</p>
 </li>
 <li><p>The dust in the industrial zone frustrated the industrious man.</p>
 <p>释义：</p>
+<p>dust 灰尘</p>
+<p>industrial zone 工厂区域</p>
+<p>frustrated 使……灰心</p>
+<p>industrious man 勤勉的人</p>
 </li>
 <li><p>The just budget judge just justifies the adjustment of justice.</p>
 <p>释义：</p>
@@ -541,6 +724,9 @@
 </li>
 <li><p>I paced in the peaceful spacecraft.</p>
 <p>释义：</p>
+<p>paced 踱步</p>
+<p>peaceful 宁静、安静</p>
+<p>spacecraft 宇宙飞船</p>
 </li>
 <li><p>Sir, your bird stirred my girlfriend’s birthday party.</p>
 <p>释义：</p>
@@ -659,6 +845,39 @@
       </tags>
   </entry>
   <entry>
+    <title>设计模式-代理模式</title>
+    <url>/2021/05/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>设计模式-结构型</category>
+      </categories>
+      <tags>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>设计模式-单例模式</title>
+    <url>/2021/05/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>设计模式-创建型</category>
+      </categories>
+      <tags>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>设计模式-原型模式</title>
+    <url>/2021/05/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>设计模式-创建型</category>
+      </categories>
+      <tags>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>设计模式-命令模式</title>
     <url>/2021/05/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[]]></content>
@@ -692,22 +911,22 @@
       </tags>
   </entry>
   <entry>
-    <title>设计模式-模版方法模式</title>
-    <url>/2021/05/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E6%A8%A1%E7%89%88%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/</url>
+    <title>设计模式-抽象工厂模式</title>
+    <url>/2021/05/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[]]></content>
       <categories>
-        <category>设计模式-行为型</category>
+        <category>设计模式-创建型</category>
       </categories>
       <tags>
         <tag>设计模式</tag>
       </tags>
   </entry>
   <entry>
-    <title>设计模式-抽象工厂模式</title>
-    <url>/2021/05/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</url>
+    <title>设计模式-模版方法模式</title>
+    <url>/2021/05/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E6%A8%A1%E7%89%88%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[]]></content>
       <categories>
-        <category>设计模式-创建型</category>
+        <category>设计模式-行为型</category>
       </categories>
       <tags>
         <tag>设计模式</tag>
@@ -747,8 +966,8 @@
       </tags>
   </entry>
   <entry>
-    <title>设计模式-责任链模式</title>
-    <url>/2021/05/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F/</url>
+    <title>设计模式-观察者模式</title>
+    <url>/2021/05/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>设计模式-行为型</category>
@@ -758,8 +977,8 @@
       </tags>
   </entry>
   <entry>
-    <title>设计模式-观察者模式</title>
-    <url>/2021/05/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/</url>
+    <title>设计模式-责任链模式</title>
+    <url>/2021/05/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>设计模式-行为型</category>
@@ -780,19 +999,8 @@
       </tags>
   </entry>
   <entry>
-    <title>设计模式-代理模式</title>
-    <url>/2021/05/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>设计模式-结构型</category>
-      </categories>
-      <tags>
-        <tag>设计模式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>vim终端编辑器</title>
-    <url>/2017/07/12/vim%E7%BB%88%E7%AB%AF%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8/</url>
+    <title>Vim终端编辑器</title>
+    <url>/2017/07/12/Vim%E7%BB%88%E7%AB%AF%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8/</url>
     <content><![CDATA[<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><ul>
 <li><code>vi</code> 简介</li>
 <li>打开和新建文件</li>
@@ -834,7 +1042,7 @@
 </li>
 <li><code>vi</code> 编辑器在 <strong>系统管理</strong>、<strong>服务器管理</strong> 编辑文件时，<strong>其功能永远不是图形界面的编辑器能比拟的</strong></li>
 </ul>
-<h4 id="vim"><a href="#vim" class="headerlink" title="vim"></a><code>vim</code></h4><p><strong>vim = vi improved</strong></p>
+<h4 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h4><p><strong>vim = vi improved</strong></p>
 <ul>
 <li><code>vim</code> 是从 <code>vi</code> 发展出来的一个文本编辑器，支持 <strong>代码补全</strong>、<strong>编译</strong> 及 <strong>错误跳转</strong> 等方便编程的功能特别丰富，在程序员中被广泛使用，被称为 <strong>编辑器之神</strong></li>
 </ul>
@@ -1695,10 +1903,10 @@
 </ul>
 ]]></content>
       <categories>
-        <category>vim</category>
+        <category>开发工具</category>
       </categories>
       <tags>
-        <tag>vim</tag>
+        <tag>Vim</tag>
       </tags>
   </entry>
 </search>
